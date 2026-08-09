@@ -8,10 +8,5 @@
         "id": 2,
         "name": "Ganesh",
         "course": "Flask"
-    },
-    {
-        "id": 2,
-        "name": "Amit",
-        "course": "MongoDB"
     }
 ]
