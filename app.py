@@ -1,19 +1,27 @@
 import os
 import json
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from pymongo import MongoClient
-from flask import render_template
 from dotenv import load_dotenv
 
+app = Flask(__name__, template_folder='template')
+
+#Load environment variables from .env file
 load_dotenv()
 
-app = Flask(__name__)
-
 # Existing MongoDB Connection
-client = MongoClient(os.getenv("MONGODB_URI"))
+# MongoDB Connection
+load_dotenv()
+
+MONGODB_URI = os.getenv("MONGODB_URI")
+
+client = MongoClient(
+    MONGODB_URI,
+    serverSelectionTimeoutMS=10000
+)
+
 db = client.todo_db
 collection = db.todo_items
-
 
 class todo_items:
     """Helper class to manage todo items in MongoDB."""
@@ -90,23 +98,39 @@ def get_data():
     return jsonify(data)
 
 # New Route for master_2 Branch
-@app.route('/submittodoitem', methods=['GET', 'POST'])
+@app.route('/submittodoitem', methods=['POST'])
 def submit_todo():
 
-    if request.method == 'GET':
-        return "Route is working"
+    print("POST /submittodoitem received")
 
     item_name = request.form.get('itemName')
-    item_desc = request.form.get('itemDescription')
+    item_id = request.form.get('itemID')
+    item_uuid = request.form.get('itemUUID')
+    item_hash = request.form.get('itemHash')
+    item_description = request.form.get('itemDescription')
 
-    inserted_id = todo_helper.create_item(
-        item_name,
-        item_desc
-    )
+    print("Item Name:", item_name)
+    print("Item ID:", item_id)
+    print("Item UUID:", item_uuid)
+    print("Item Hash:", item_hash)
+
+    inserted_id = collection.insert_one({
+        "itemName": item_name,
+        "itemID": item_id,
+        "itemUUID": item_uuid,
+        "itemHash": item_hash,
+        "itemDescription": item_description
+    }).inserted_id
 
     return jsonify({
         "message": "Todo item saved successfully",
-        "id": inserted_id
+        "id": str(inserted_id)
+    })
+
+# MongoDB code here
+
+    return jsonify({
+        "message": "Todo item received successfully"
     })
 
 if __name__ == '__main__':
