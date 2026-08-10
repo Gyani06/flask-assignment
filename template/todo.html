@@ -1,5 +1,11 @@
-<form method="post" action="/your-post-route">
-  <input type="text" name="itemname" placeholder="Item Name">
-  <textarea name="itemdescription" placeholder="Item Description"></textarea>
-  <button type="submit">Add Item</button>
+<form action="/submittodoitem" method="POST">
+
+  <input type="text" name="itemName" placeholder="Item Name">
+  <input type="text" name="itemID" placeholder="Item ID">
+
+  <textarea name="itemDescription" placeholder="Item Description"></textarea>
+  <textarea name="itemDueDate" placeholder="Item Due Date"></textarea>
+
+  <button type="submit">Submit</button>
+
 </form>
