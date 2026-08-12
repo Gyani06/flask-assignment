@@ -6,13 +6,6 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import certify
 
-load_dotenv()
-
-MONGODB_URI = os.getenv("MONGODB_URI")
-
-client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=10000)
-
-app = Flask(__name__)
 app = Flask(__name__, template_folder='template')
 
 #Load environment variables from .env file
