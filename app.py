@@ -54,6 +54,11 @@ def submit_todo():
     return jsonify({
         "message": "Todo item saved successfully"
     })
+# MongoDB code here
+
+    return jsonify({
+        "message": "Todo item received successfully"
+    })
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
