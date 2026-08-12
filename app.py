@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -9,6 +9,10 @@ app = Flask(__name__)
 client = MongoClient("mongodb://localhost:27017/")
 db = client.todo_db
 collection = db.todo_items
+
+@app.route('/')
+def home():
+    return render_template('todo.html')
 
 # Existing API Route
 @app.route('/api')
