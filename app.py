@@ -3,17 +3,21 @@ import json
 from flask import Flask, jsonify, request, render_template
 from dotenv import load_dotenv
 from pymongo import MongoClient
+import certifi
 
 load_dotenv()
 
 MONGODB_URI = os.getenv("MONGODB_URI")
 
-client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=10000)
+client = MongoClient(
+    MONGODB_URI,
+    tls=True,
+    tlsCAFile=certifi.where(),
+    serverSelectionTimeoutMS=10000
+)
 
 app = Flask(__name__)
 
-# Existing MongoDB Connection
-client = MongoClient("mongodb://localhost:27017/")
 db = client.todo_db
 collection = db.todo_items
 
