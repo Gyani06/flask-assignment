@@ -1,15 +1,11 @@
 import os
 import json
 from flask import Flask, jsonify, request, render_template
-from dotenv import load_dotenv
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import certify
 
 app = Flask(__name__, template_folder='template')
-
-#Load environment variables from .env file
-load_dotenv()
 
 # Existing MongoDB Connection
 # MongoDB Connection
