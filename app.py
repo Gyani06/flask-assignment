@@ -3,6 +3,7 @@ import json
 from flask import Flask, jsonify, request, render_template
 from pymongo import MongoClient
 from dotenv import load_dotenv
+import certify
 
 app = Flask(__name__, template_folder='template')
 
