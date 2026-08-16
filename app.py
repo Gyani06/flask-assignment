@@ -6,9 +6,6 @@ from dotenv import load_dotenv
 
 app = Flask(__name__, template_folder='template')
 
-#Load environment variables from .env file
-load_dotenv()
-
 # Existing MongoDB Connection
 # MongoDB Connection
 load_dotenv()
